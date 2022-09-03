@@ -20,7 +20,7 @@
 
 .left > h1 {
   font-size: 6rem;
-  color: #a5c9ca;
+  color: #eae3d2;
 }
 
 .btn {
@@ -49,12 +49,12 @@
   /* padding: 4rem; */
 }
 
-.right {
+.righte {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.right > img {
+.righte > img {
   width: 80%;
 }

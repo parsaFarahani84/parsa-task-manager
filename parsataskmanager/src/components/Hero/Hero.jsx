@@ -1,7 +1,7 @@
 import React from "react";
 import "./Hero.css";
 import logo from "../../img/PTM2.png";
-import img from "../../img/o2.svg";
+import img from "../../img/o.svg";
 import { Link } from "react-router-dom";
 
 function Hero() {
@@ -21,7 +21,7 @@ function Hero() {
         </div>
       </div>
 
-      <div className="right">
+      <div className="righte">
         <img src={img} />
       </div>
     </div>
