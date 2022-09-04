@@ -122,7 +122,8 @@
 .check {
   fill: #a5c9ca;
   display: flex;
-  
+  justify-content: space-between;
+  align-items: center;
 }
 
 .right {
@@ -228,11 +229,18 @@
   color: white;
 }
 
+.timer {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
 .time {
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   margin-top: -2rem;
+  z-index: 1;
 }
 
 .counting {
@@ -260,8 +268,22 @@
   font-size: 1.4rem;
 }
 
+.check {
+  display: flex;
+  flex-direction: column;
+}
+
 .small-check {
   font-size: 3rem;
   margin-bottom: -1rem;
   cursor: pointer;
 }
+
+.box {
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+

@@ -14,7 +14,7 @@ import logo from "../../img/PTM2.png";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { MdWork } from "react-icons/md";
 import { FaBed } from "react-icons/fa";
-import { BsPlayCircleFill } from "react-icons/bs";
+import { BsConeStriped, BsPlayCircleFill } from "react-icons/bs";
 import { GrPowerReset } from "react-icons/gr";
 import { GiPartyPopper } from "react-icons/gi";
 import { AiFillMinusCircle } from "react-icons/ai";
@@ -24,7 +24,15 @@ import { GiMeditation } from "react-icons/gi";
 
 function Main() {
   const [num, setNum] = useState(0);
+  const [bc, setBc] = useState("#eeeeee");
 
+  const colorchange = function () {
+    if (num <= 8) {
+      setBc("#1C3879");
+    }
+  };
+
+  
   const data = [
     {
       title: "Today",
@@ -54,10 +62,12 @@ function Main() {
   ];
 
   const increaseNum = function () {
+    colorchange();
     return setNum(num + 1);
   };
 
   const decNum = function () {
+    colorchange();
     if (num <= 0) {
       return;
     } else {
@@ -66,6 +76,8 @@ function Main() {
   };
 
   const [seconds, setSeconds] = useState(0);
+  const [minuts, setMinuts] = useState(0);
+  const [houers, setHouers] = useState(0);
   const [isActive, setIsActive] = useState(false);
 
   function toggle() {
@@ -74,18 +86,30 @@ function Main() {
 
   function reset() {
     setSeconds(0);
+    setMinuts(0);
+    setHouers(0);
     setIsActive(false);
   }
 
   useEffect(() => {
     let interval = null;
+
     if (isActive) {
       interval = setInterval(() => {
         setSeconds((seconds) => seconds + 1);
+        if (seconds === 59) {
+          setSeconds(0);
+          setMinuts((m) => m + 1);
+        }
+        if (minuts === 59) {
+          setMinuts(0);
+          setHouers((h) => h + 1);
+        }
       }, 1000);
     } else if (!isActive && seconds !== 0) {
       clearInterval(interval);
     }
+
     return () => clearInterval(interval);
   }, [isActive, seconds]);
 
@@ -99,19 +123,19 @@ function Main() {
               <img className="icon" src={e.icon} />
             </div>
             <button className="mbtn">Let's see</button>
-            {/* <img src={`${e.wave}`} className="wave" /> */}
           </div>
         ))}
       </div>
       <div className="rutins">
         <div className="ro">
-          <div className="right styles">
+          <div className="right styles" style={{ backgroundColor: `${bc}` }}>
             <div className="water-h containers">
               <GiWaterFlask className="icons" />
               <h3 className="font-h">Glass of Water</h3>
             </div>
             <div className="time">
-              <h1 clas>8 Times</h1>
+              {/* <div className="onborder"> </div> */}
+              <h1>8 Times</h1>
             </div>
             <div className="counting">
               <AiFillMinusCircle className="icont" onClick={decNum} />
@@ -126,23 +150,25 @@ function Main() {
             </div>
             <div className="time">
               <h1 clas>10m a day</h1>
+              <div className="timer">
+                {houers}h , {minuts}m , {seconds}s
+              </div>
             </div>
 
             <div className="check">
-              <BiCircle className="small-check" />
-              <div className="timer">{seconds}s</div>
-
-              <div className="row">
-                <BsPlayCircleFill
-                  className="small-check"
-                  onClick={toggle}
-                ></BsPlayCircleFill>
-                <GrPowerReset className="small-check" onClick={reset}>
-                  Reset
-                </GrPowerReset>
+              <div className="box">
+                <BiCircle className="small-check" />
+                <div className="row">
+                  <BsPlayCircleFill
+                    className="small-check"
+                    onClick={toggle}
+                  ></BsPlayCircleFill>
+                  <GrPowerReset className="small-check" onClick={reset}>
+                    Reset
+                  </GrPowerReset>
+                </div>
               </div>
             </div>
-            <div className="timer"></div>
           </div>
           <div className="right styles">
             <div className="work-h containers">
