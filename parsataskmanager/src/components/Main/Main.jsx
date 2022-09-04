@@ -24,15 +24,8 @@ import { GiMeditation } from "react-icons/gi";
 
 function Main() {
   const [num, setNum] = useState(0);
-  const [bc, setBc] = useState("#eeeeee");
+  const [active, setActive] = useState(false);
 
-  const colorchange = function () {
-    if (num <= 8) {
-      setBc("#1C3879");
-    }
-  };
-
-  
   const data = [
     {
       title: "Today",
@@ -62,12 +55,12 @@ function Main() {
   ];
 
   const increaseNum = function () {
-    colorchange();
+    handleClick();
     return setNum(num + 1);
   };
 
   const decNum = function () {
-    colorchange();
+    handleClick();
     if (num <= 0) {
       return;
     } else {
@@ -113,6 +106,19 @@ function Main() {
     return () => clearInterval(interval);
   }, [isActive, seconds]);
 
+  const handleClick = () => {
+    // 👇️ toggle
+    if (num >= 8) {
+      setActive(true);
+    }
+    if (num < 8) {
+      setActive(false);
+    }
+
+    // 👇️ or set to true
+    // setIsActive(true);
+  };
+
   return (
     <div className="main-container">
       <div className="main-tasks">
@@ -128,13 +134,18 @@ function Main() {
       </div>
       <div className="rutins">
         <div className="ro">
-          <div className="right styles" style={{ backgroundColor: `${bc}` }}>
+          <div
+            className="right styles"
+            style={{
+              backgroundColor: active ? "salmon" : "",
+              color: active ? "white" : "",
+            }}
+          >
             <div className="water-h containers">
               <GiWaterFlask className="icons" />
               <h3 className="font-h">Glass of Water</h3>
             </div>
             <div className="time">
-              {/* <div className="onborder"> </div> */}
               <h1>8 Times</h1>
             </div>
             <div className="counting">
