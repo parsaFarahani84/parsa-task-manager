@@ -14,8 +14,12 @@ import logo from "../../img/PTM2.png";
 import { AiFillPlusCircle } from "react-icons/ai";
 import { MdWork } from "react-icons/md";
 import { FaBed } from "react-icons/fa";
-import { BsConeStriped, BsPlayCircleFill } from "react-icons/bs";
-import { GrPowerReset } from "react-icons/gr";
+import {
+  BsConeStriped,
+  BsPlayCircleFill,
+  BsFillPauseCircleFill,
+} from "react-icons/bs";
+import { BiReset } from "react-icons/bi";
 import { GiPartyPopper } from "react-icons/gi";
 import { AiFillMinusCircle } from "react-icons/ai";
 import { BiCircle } from "react-icons/bi";
@@ -55,12 +59,18 @@ function Main() {
   ];
 
   const increaseNum = function () {
-    handleClick();
+    if (num >= 7) {
+      setActive(true);
+    }
+
     return setNum(num + 1);
   };
 
   const decNum = function () {
-    handleClick();
+    if (num < 9) {
+      setActive(false);
+      console.log("NO");
+    }
     if (num <= 0) {
       return;
     } else {
@@ -106,18 +116,7 @@ function Main() {
     return () => clearInterval(interval);
   }, [isActive, seconds]);
 
-  const handleClick = () => {
-    // 👇️ toggle
-    if (num >= 8) {
-      setActive(true);
-    }
-    if (num < 8) {
-      setActive(false);
-    }
-
-    // 👇️ or set to true
-    // setIsActive(true);
-  };
+  const [button, setButton] = useState(false);
 
   return (
     <div className="main-container">
@@ -139,6 +138,7 @@ function Main() {
             style={{
               backgroundColor: active ? "salmon" : "",
               color: active ? "white" : "",
+              borderRadius: " 50px 0 0 50px",
             }}
           >
             <div className="water-h containers">
@@ -154,7 +154,13 @@ function Main() {
               <AiFillPlusCircle className="icont" onClick={increaseNum} />
             </div>
           </div>
-          <div className="right styles">
+          <div
+            className="right styles"
+            style={{
+              backgroundColor: minuts >= 10 ? "salmon" : "",
+              color: minuts >= 10 ? "white" : "",
+            }}
+          >
             <div className="medit-h containers">
               <GiMeditation className="icont" />
               <h3 className="font-h">Meditation</h3>
@@ -168,15 +174,20 @@ function Main() {
 
             <div className="check">
               <div className="box">
-                <BiCircle className="small-check" />
                 <div className="row">
-                  <BsPlayCircleFill
-                    className="small-check"
-                    onClick={toggle}
-                  ></BsPlayCircleFill>
-                  <GrPowerReset className="small-check" onClick={reset}>
-                    Reset
-                  </GrPowerReset>
+                  {!isActive ? (
+                    <BsPlayCircleFill
+                      className="small-check"
+                      onClick={toggle}
+                    ></BsPlayCircleFill>
+                  ) : (
+                    <BsFillPauseCircleFill
+                      className="small-check"
+                      onClick={toggle}
+                    ></BsFillPauseCircleFill>
+                  )}
+
+                  <BiReset className="small-check" onClick={reset}></BiReset>
                 </div>
               </div>
             </div>
@@ -190,7 +201,12 @@ function Main() {
               <h1 clas>8h every day</h1>
             </div>
             <div className="check">
-              <BiCircle className="small-check" />
+              <BiCircle
+                className="small-check"
+                onClick={() => {
+                  setButton(true);
+                }}
+              />
             </div>
           </div>
           <div className="right styles ">
@@ -205,7 +221,7 @@ function Main() {
               <BiCircle className="small-check" />
             </div>
           </div>
-          <div className="styles">
+          <div className="styles g" style={{ borderRadius: "0 50px 50px 0" }}>
             <div className="containers">
               <div className="he">
                 <GiPartyPopper className="icont" />

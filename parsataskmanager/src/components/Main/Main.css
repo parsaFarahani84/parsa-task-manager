@@ -104,12 +104,13 @@
   margin: auto;
   justify-items: center;
   /* background: linear-gradient(to left, #f7ecde, #e9dac1); */
-  background-color: #eeeeee;
+
   color: #333;
-  border-radius: 50px;
+  /* border-radius: 50px; */
 }
 .ro > div {
   /* border: 1px solid black; */
+  background-color: #eeeeee;
   padding: 1.5rem;
   height: 30vh;
   width: 100%;
@@ -282,7 +283,13 @@
 .box {
   display: flex;
   /* flex-direction: column; */
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.row {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
 }
