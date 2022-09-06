@@ -10,7 +10,7 @@
   display: flex;
   width: 50%;
   flex-direction: column;
-  padding: 2rem 5rem;
+  padding: 1rem 3rem;
   justify-content: center;
 }
 
@@ -19,14 +19,14 @@
 }
 
 .left > h1 {
-  font-size: 6rem;
+  font-size: 3rem;
   color: #eae3d2;
 }
 
 .btn {
   padding: 1rem 0.75rem;
-  width: 10rem;
-  font-size: 1rem;
+  width: 7rem;
+  font-size: 0.65rem;
   font-weight: 600;
   border: none;
   cursor: pointer;
@@ -45,8 +45,8 @@
 
 .hero-logo {
   border-radius: 10rem;
-  width: 8rem;
-  /* padding: 4rem; */
+  width: 5rem;
+  
 }
 
 .righte {
@@ -57,4 +57,37 @@
 
 .righte > img {
   width: 80%;
+}
+
+@media screen and (max-width: 500px){
+.main-hero{
+  flex-direction: column;
+}
+
+.left{
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.btn-div{
+  width:100%
+}
+
+.btn{
+  font-size: 1.2rem;
+  padding: 1.5rem 1rem;
+  width: 12rem;
+  border-radius: 40px;
+}
+
+.left h1{
+  font-size: 3rem;
+margin-bottom: 1rem;
+}
+
+.righte{
+  margin-top: 3rem;
+}
 }

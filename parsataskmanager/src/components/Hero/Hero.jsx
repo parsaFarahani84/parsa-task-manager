@@ -13,7 +13,7 @@ function Hero() {
 
       <div className="left">
         <h1>USE YOUR DAYS BETTER WHIT US</h1>
-        <div>
+        <div className="btn-div">
           <Link to="/manager" className="none">
             {" "}
             <button className="btn">Start now for free</button>
