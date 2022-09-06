@@ -11,15 +11,6 @@ import { GiWaterFlask, GiMeditation, GiPartyPopper } from "react-icons/gi";
 // import AddRoutin from "../AddRoutin/AddRoutin";
 
 function Routins() {
-  const [button, setButton] = useState(false);
-  const [seconds, setSeconds] = useState(0);
-  const [minuts, setMinuts] = useState(0);
-  const [houers, setHouers] = useState(0);
-  const [isActive, setIsActive] = useState(false);
-  const [num, setNum] = useState(0);
-  const [active, setActive] = useState(false);
-  const [complete, setcomplete] = useState(false);
-
   //   setRoutin(newRoutin);
 
   const [rData, setRdata] = useState([
@@ -30,6 +21,7 @@ function Routins() {
       type: "plus-minus",
       id: Math.random() * 10000,
       complete: false,
+      num: 0,
     },
 
     {
@@ -39,6 +31,10 @@ function Routins() {
       type: "timer",
       id: Math.random() * 10000,
       complete: false,
+      activeTimer: false,
+      houers: 0,
+      minuts: 0,
+      seconds: 0,
     },
     {
       icon: <MdWork className="icons" />,
@@ -66,143 +62,86 @@ function Routins() {
     },
   ]);
 
-  const checkType = function (e) {
-    // if (e.type === "plus-minus") {
-    //   return (
-    //     <div className="counting">
-    //       <AiFillMinusCircle className="icont" onClick={decNum} />
-    //       {num}
-    //       <AiFillPlusCircle className="icont" onClick={increaseNum} />
-    //     </div>
-    //   );
-    // } else if (e.type === "check") {
-    //   return (
-    //     <div className="check">
-    //       {!button ? (
-    //         <BiCircle
-    //           className="small-check"
-    //           onClick={() => {
-    //             setButton(true);
-    //             if (button) {
-    //               setButton(false);
-    //             }
-    //           }}
-    //         />
-    //       ) : (
-    //         <AiFillCheckCircle
-    //           className="small-check"
-    //           onClick={() => {
-    //             setButton(true);
-    //             if (button) {
-    //               setButton(false);
-    //             }
-    //           }}
-    //         />
-    //       )}
-    //     </div>
-    //   );
-    // } else if (e.type === "timer") {
-    //   return (
-    //     <div>
-    //       <div className="time">
-    //         <div className="timer">
-    //           {houers}h , {minuts}m , {seconds}s
-    //         </div>
-    //       </div>
-    //       <div className="check">
-    //         <div className="box">
-    //           <div className="row">
-    //             {!isActive ? (
-    //               <BsPlayCircleFill
-    //                 className="small-check"
-    //                 onClick={toggle}
-    //               ></BsPlayCircleFill>
-    //             ) : (
-    //               <BsFillPauseCircleFill
-    //                 className="small-check"
-    //                 onClick={toggle}
-    //               ></BsFillPauseCircleFill>
-    //             )}
-    //             <BiReset className="small-check" onClick={reset}></BiReset>
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   );
-    // }
+  const increaseNum = function (id) {
+    let updated = rData.map((e) => {
+      if (id === e.id) {
+        e.num = e.num + 1;
+
+        if (e.num === 8) {
+          e.complete = true;
+        }
+        if (e.num <= 7) {
+          e.complete = false;
+        }
+      }
+      return e;
+    });
+    setRdata(updated);
   };
 
-  const func = function (e) {
-    if (e.type === "plus-minus") {
-      return {
-        backgroundColor: num >= 8 ? "#3c498b" : "",
-        color: num >= 8 ? "white" : "",
-      };
-    } else if (e.type === "timer") {
-      return {
-        backgroundColor: minuts >= 10 ? "#3c498b" : "",
-        color: minuts >= 10 ? "white" : "",
-      };
-    } else if (e.type === "check") {
-      return {
-        backgroundColor: button ? "#3c498b" : "",
-        color: button ? "white" : "",
-      };
-    }
+  const decNum = function (id) {
+    let updated = rData.map((e) => {
+      if (e.id === id) {
+        e.num = e.num - 1;
+
+        if (e.num === 8) {
+          e.complete = true;
+        }
+        if (e.num <= 7) {
+          e.complete = false;
+        }
+      }
+      return e;
+    });
+
+    setRdata(updated);
   };
 
-  const increaseNum = function () {
-    if (num >= 7) {
-      setActive(true);
-    }
+  const Effect = function (e) {
+    useEffect(() => {
+      let interval = null;
 
-    return setNum(num + 1);
+      if (e.activeTimer) {
+        interval = setInterval(() => {
+          e.seconds = e.seconds + 1;
+          if (e.seconds === 59) {
+            e.seconds = 0;
+            e.minuts = e.minuts + 1;
+          }
+          if (e.minuts === 59) {
+            e.minuts = 0;
+            e.houers = e.houers + 1;
+          }
+        }, 1000);
+      } else if (!e.activeTimer && e.seconds !== 0) {
+        clearInterval(interval);
+      }
+
+      return () => clearInterval(interval);
+    }, [e.activeTimer, e.seconds]);
   };
 
-  const decNum = function () {
-    if (num < 9) {
-      setActive(false);
-      console.log("NO");
-    }
-    if (num <= 0) {
-      return;
-    } else {
-      return setNum(num - 1);
-    }
-  };
-
-  function toggle() {
-    setIsActive(!isActive);
+  function toggle(id) {
+    let updated = rData.map((e) => {
+      if (id === e.id) {
+        e.activeTimer = !e.activeTimer;
+        console.log(e.activeTimer);
+      }
+      return e;
+    });
+    setRdata(updated);
   }
 
-  function reset() {
-    setSeconds(0);
-    setMinuts(0);
-    setHouers(0);
-    setIsActive(false);
+  function reset(e) {
+    // setSeconds(0);
+    e.seconds = 0;
+    // setMinuts(0);
+    e.minuts = 0;
+    // setHouers(0);
+    e.houers = 0;
+    // setIsActive(false);
+    e.activeTimer = false;
   }
-
-  useEffect(() => {
-    let interval = null;
-
-    if (isActive) {
-      interval = setInterval(() => {
-        setSeconds((seconds) => seconds + 1);
-        if (seconds === 59) {
-          setSeconds(0);
-          setMinuts((m) => m + 1);
-        }
-        if (minuts === 59) {
-          setMinuts(0);
-          setHouers((h) => h + 1);
-        }
-      }, 1000);
-    } else if (!isActive && seconds !== 0) {
-      clearInterval(interval);
-    }
-
-    return () => clearInterval(interval);
-  }, [isActive, seconds]);
 
   const completeTodo = (id) => {
     let updated = rData.map((e) => {
@@ -216,9 +155,81 @@ function Routins() {
     setRdata(updated);
   };
 
+  const checking = function (prop) {
+    if (prop.type === "check") {
+      return (
+        <div className="check">
+          {!prop.complete ? (
+            <BiCircle
+              className="small-check"
+              onClick={() => {
+                completeTodo(prop.id);
+              }}
+            />
+          ) : (
+            <AiFillCheckCircle
+              className="small-check"
+              onClick={() => {
+                completeTodo(prop.id);
+              }}
+            />
+          )}
+        </div>
+      );
+    } else if (prop.type === "plus-minus") {
+      return (
+        <div className="counting">
+          <AiFillMinusCircle
+            className="icont"
+            onClick={() => {
+              decNum(prop.id);
+            }}
+          />
+          {prop.num}
+          <AiFillPlusCircle
+            className="icont"
+            onClick={() => {
+              increaseNum(prop.id);
+            }}
+          />
+        </div>
+      );
+    } else if (prop.type === "timer") {
+      return (
+        <div>
+          <div className="time">
+            <div className="timer">
+              {prop.houers}h , {prop.minuts}m , {prop.seconds}s
+            </div>
+          </div>
+          <div className="check">
+            <div className="box">
+              <div className="row">
+                {!prop.activeTimer ? (
+                  <BsPlayCircleFill
+                    className="small-check"
+                    onClick={() => toggle(prop.id)}
+                  ></BsPlayCircleFill>
+                ) : (
+                  <BsFillPauseCircleFill
+                    className="small-check"
+                    onClick={() => toggle(prop.id)}
+                  ></BsFillPauseCircleFill>
+                )}
+                <BiReset
+                  className="small-check"
+                  onClick={() => reset(prop)}
+                ></BiReset>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  };
+
   return (
     <div className="rutins">
-      {/* <AddRoutin /> */}
       <div className="ro">
         {rData.map((prop) => (
           <div
@@ -232,15 +243,7 @@ function Routins() {
             <div className="time">
               <h1>{prop.time}</h1>
             </div>
-            {/* {checkType(prop)} */}
-            <div className="check">
-              <BiCircle
-                className="small-check"
-                onClick={() => {
-                  completeTodo(prop.id);
-                }}
-              />
-            </div>
+            {checking(prop)}
           </div>
         ))}
       </div>
