@@ -10,6 +10,13 @@ import wave2 from "../../img/wave2.svg";
 import wave3 from "../../img/wave3.svg";
 import wave4 from "../../img/wave4.svg";
 import logo from "../../img/PTM2.png";
+import { TiThMenu } from "react-icons/ti";
+import {
+  AiOutlineInstagram,
+  AiOutlineFacebook,
+  AiFillTwitterCircle,
+  AiOutlineLinkedin,
+} from "react-icons/ai";
 
 function Main() {
   const data = [
@@ -40,8 +47,28 @@ function Main() {
     },
   ];
 
+  const [acm, setAcm] = useState(false);
+
+  const showM = function () {
+    setAcm((e) => !e);
+    console.log(acm);
+  };
+
+  // const setStyles = function () {
+  //   if (acm) {
+  //     console.log("lili");
+  //     return transform: 'translate(0)'";
+  //   } else {
+  //     return "transform : 'translate(100%)'";
+  //   }
+  // };
+
   return (
     <div className="main-container">
+      <div className="menu-icon">
+        <TiThMenu className="menu-log" onClick={showM} />
+      </div>
+
       <div className="main-tasks">
         {data.map((e) => (
           <div className="card" style={{ border: `${e.border}` }}>
@@ -56,7 +83,10 @@ function Main() {
 
       <Routins />
 
-      <div className="menu">
+      <div
+        className="menu"
+        style={{ transform: `${!acm ? "translate(0%)" : "translate(200%)"}` }}
+      >
         <div className="header-m">
           <img src={logo} className="m-logo" style={{ borderRadius: "50%" }} />
           <h3>MENU</h3>
@@ -81,18 +111,30 @@ function Main() {
         </ul>
         <div className="social">
           <li className="th">
-            <box-icon name="instagram" type="logo"></box-icon>
+            <AiOutlineInstagram
+              type="logo"
+              className="icons"
+            ></AiOutlineInstagram>
           </li>
           <li className="th">
             {" "}
-            <box-icon type="logo" name="twitter"></box-icon>{" "}
+            <AiOutlineFacebook
+              type="logo"
+              className="icons"
+            ></AiOutlineFacebook>{" "}
           </li>
           <li className="th">
             {" "}
-            <box-icon name="telegram" type="logo"></box-icon>{" "}
+            <AiOutlineLinkedin
+              type="logo"
+              className="icons"
+            ></AiOutlineLinkedin>{" "}
           </li>{" "}
           <li className="th">
-            <box-icon name="facebook-circle" type="logo"></box-icon>{" "}
+            <AiFillTwitterCircle
+              className="icons"
+              type="logo"
+            ></AiFillTwitterCircle>{" "}
           </li>
         </div>
       </div>
