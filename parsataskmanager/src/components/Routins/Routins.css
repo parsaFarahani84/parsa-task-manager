@@ -1,4 +1,27 @@
 .active {
-  background-color: #3c498b !important;
+  /* background: linear-gradient(#1c2e4c, #35bdfc); */
+  background: #2254ac !important;
   color: white;
+}
+
+.add {
+  color: #fff;
+  cursor: pointer;
+  z-index: 750;
+  font-size: 2rem;
+  position: fixed;
+  right: 17rem;
+  bottom: 15rem;
+}
+
+@media screen and (max-width: 500px) {
+  .add {
+    bottom: 23rem;
+    right: 1rem;
+  }
+}
+
+.add-div {
+  display: flex;
+  flex-direction: column;
 }

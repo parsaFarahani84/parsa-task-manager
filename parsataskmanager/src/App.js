@@ -8,6 +8,7 @@ import {
   Routes,
 } from "react-router-dom";
 import Main from "./components/Main/Main";
+import AddRoutin from "./components/AddRoutin/AddRoutin";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Hero />}></Route>
         <Route path="/manager" element={<Main />}></Route>
+        <Route path="/add-routin" element={<AddRoutin />}></Route>
       </Routes>
     </div>
   );

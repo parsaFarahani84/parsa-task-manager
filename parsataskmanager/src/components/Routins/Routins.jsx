@@ -9,10 +9,11 @@ import { AiFillMinusCircle, AiFillCheckCircle } from "react-icons/ai";
 import { BiCircle } from "react-icons/bi";
 import { GiWaterFlask, GiMeditation, GiPartyPopper } from "react-icons/gi";
 // import AddRoutin from "../AddRoutin/AddRoutin";
+import { BsPlusSquareFill } from "react-icons/bs";
+import AddRoutin from "../AddRoutin/AddRoutin";
+import { Link } from "react-router-dom";
 
-function Routins() {
-  //   setRoutin(newRoutin);
-
+function Routins(props) {
   const [rData, setRdata] = useState([
     {
       icon: <GiWaterFlask className="icons" />,
@@ -82,8 +83,9 @@ function Routins() {
   const decNum = function (id) {
     let updated = rData.map((e) => {
       if (e.id === id) {
-        e.num = e.num - 1;
-
+        if (e.num > 0) {
+          e.num = e.num - 1;
+        }
         if (e.num === 8) {
           e.complete = true;
         }
@@ -97,29 +99,29 @@ function Routins() {
     setRdata(updated);
   };
 
-  const Effect = function (e) {
-    useEffect(() => {
-      let interval = null;
+  // const Effect = function (e) {
+  //   useEffect(() => {
+  //     let interval = null;
 
-      if (e.activeTimer) {
-        interval = setInterval(() => {
-          e.seconds = e.seconds + 1;
-          if (e.seconds === 59) {
-            e.seconds = 0;
-            e.minuts = e.minuts + 1;
-          }
-          if (e.minuts === 59) {
-            e.minuts = 0;
-            e.houers = e.houers + 1;
-          }
-        }, 1000);
-      } else if (!e.activeTimer && e.seconds !== 0) {
-        clearInterval(interval);
-      }
+  //     if (e.activeTimer) {
+  //       interval = setInterval(() => {
+  //         e.seconds = e.seconds + 1;
+  //         if (e.seconds === 59) {
+  //           e.seconds = 0;
+  //           e.minuts = e.minuts + 1;
+  //         }
+  //         if (e.minuts === 59) {
+  //           e.minuts = 0;
+  //           e.houers = e.houers + 1;
+  //         }
+  //       }, 1000);
+  //     } else if (!e.activeTimer && e.seconds !== 0) {
+  //       clearInterval(interval);
+  //     }
 
-      return () => clearInterval(interval);
-    }, [e.activeTimer, e.seconds]);
-  };
+  //     return () => clearInterval(interval);
+  //   }, [e.activeTimer, e.seconds]);
+  // };
 
   function toggle(id) {
     let updated = rData.map((e) => {
@@ -133,13 +135,9 @@ function Routins() {
   }
 
   function reset(e) {
-    // setSeconds(0);
     e.seconds = 0;
-    // setMinuts(0);
     e.minuts = 0;
-    // setHouers(0);
     e.houers = 0;
-    // setIsActive(false);
     e.activeTimer = false;
   }
 
@@ -230,6 +228,9 @@ function Routins() {
 
   return (
     <div className="rutins">
+      <Link to="/add-routin">
+        <BsPlusSquareFill className="add" />
+      </Link>
       <div className="ro">
         {rData.map((prop) => (
           <div

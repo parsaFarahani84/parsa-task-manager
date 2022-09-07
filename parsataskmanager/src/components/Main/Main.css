@@ -305,16 +305,6 @@
   gap: 1rem;
 }
 
-.add-new {
-  position: fixed;
-  bottom: 15rem;
-  cursor: pointer;
-  z-index: 999;
-  font-size: 2rem;
-  right: 16.3rem;
-  color: white;
-}
-
 .menu-icon {
   position: fixed;
   width: 2rem;
@@ -327,7 +317,12 @@
   z-index: 999;
   font-size: 2rem;
   display: none;
+  color: #35bdfc;
 }
+
+/* .blur {
+  filter: blur(8px);
+} */
 
 @media screen and (max-width: 700px) {
   .main-container {

@@ -47,21 +47,12 @@ function Main() {
     },
   ];
 
-  const [acm, setAcm] = useState(false);
+  const [acm, setAcm] = useState(true);
 
   const showM = function () {
     setAcm((e) => !e);
     console.log(acm);
   };
-
-  // const setStyles = function () {
-  //   if (acm) {
-  //     console.log("lili");
-  //     return transform: 'translate(0)'";
-  //   } else {
-  //     return "transform : 'translate(100%)'";
-  //   }
-  // };
 
   return (
     <div className="main-container">
@@ -69,75 +60,81 @@ function Main() {
         <TiThMenu className="menu-log" onClick={showM} />
       </div>
 
-      <div className="main-tasks">
-        {data.map((e) => (
-          <div className="card" style={{ border: `${e.border}` }}>
-            <div className="flex">
-              <h2>{e.title}</h2>
-              <img className="icon" src={e.icon} />
+      <span>
+        <div className="main-tasks">
+          {data.map((e) => (
+            <div className="card" style={{ border: `${e.border}` }}>
+              <div className="flex">
+                <h2>{e.title}</h2>
+                <img className="icon" src={e.icon} />
+              </div>
+              <button className="mbtn">Let's see</button>
             </div>
-            <button className="mbtn">Let's see</button>
+          ))}
+        </div>
+
+        <Routins />
+
+        <div
+          className="menu"
+          style={{ transform: `${acm ? "translate(0%)" : "translate(200%)"}` }}
+        >
+          <div className="header-m">
+            <img
+              src={logo}
+              className="m-logo"
+              style={{ borderRadius: "50%" }}
+            />
+            <h3>MENU</h3>
           </div>
-        ))}
-      </div>
 
-      <Routins />
-
-      <div
-        className="menu"
-        style={{ transform: `${!acm ? "translate(0%)" : "translate(200%)"}` }}
-      >
-        <div className="header-m">
-          <img src={logo} className="m-logo" style={{ borderRadius: "50%" }} />
-          <h3>MENU</h3>
+          <ul className="items">
+            <li className="item">
+              Today<box-icon type="solid" name="calendar-event"></box-icon>
+            </li>
+            <li className="item">
+              This Week<box-icon name="calendar" type="solid"></box-icon>
+            </li>
+            <li className="item">
+              This Month<box-icon type="solid" name="calendar-week"></box-icon>
+            </li>
+            <li className="item">
+              Contact Us<box-icon name="phone" type="solid"></box-icon>
+            </li>
+            <li className="item">
+              Info<box-icon name="info-circle" type="solid"></box-icon>
+            </li>
+          </ul>
+          <div className="social">
+            <li className="th">
+              <AiOutlineInstagram
+                type="logo"
+                className="icons"
+              ></AiOutlineInstagram>
+            </li>
+            <li className="th">
+              {" "}
+              <AiOutlineFacebook
+                type="logo"
+                className="icons"
+              ></AiOutlineFacebook>{" "}
+            </li>
+            <li className="th">
+              {" "}
+              <AiOutlineLinkedin
+                type="logo"
+                className="icons"
+              ></AiOutlineLinkedin>{" "}
+            </li>{" "}
+            <li className="th">
+              <AiFillTwitterCircle
+                className="icons"
+                type="logo"
+              ></AiFillTwitterCircle>{" "}
+            </li>
+          </div>
         </div>
-
-        <ul className="items">
-          <li className="item">
-            Today<box-icon type="solid" name="calendar-event"></box-icon>
-          </li>
-          <li className="item">
-            This Week<box-icon name="calendar" type="solid"></box-icon>
-          </li>
-          <li className="item">
-            This Month<box-icon type="solid" name="calendar-week"></box-icon>
-          </li>
-          <li className="item">
-            Contact Us<box-icon name="phone" type="solid"></box-icon>
-          </li>
-          <li className="item">
-            Info<box-icon name="info-circle" type="solid"></box-icon>
-          </li>
-        </ul>
-        <div className="social">
-          <li className="th">
-            <AiOutlineInstagram
-              type="logo"
-              className="icons"
-            ></AiOutlineInstagram>
-          </li>
-          <li className="th">
-            {" "}
-            <AiOutlineFacebook
-              type="logo"
-              className="icons"
-            ></AiOutlineFacebook>{" "}
-          </li>
-          <li className="th">
-            {" "}
-            <AiOutlineLinkedin
-              type="logo"
-              className="icons"
-            ></AiOutlineLinkedin>{" "}
-          </li>{" "}
-          <li className="th">
-            <AiFillTwitterCircle
-              className="icons"
-              type="logo"
-            ></AiFillTwitterCircle>{" "}
-          </li>
-        </div>
-      </div>
+      </span>
     </div>
   );
 }
