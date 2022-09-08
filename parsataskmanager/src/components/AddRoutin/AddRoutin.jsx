@@ -7,22 +7,129 @@ import { Link } from "react-router-dom";
 
 function AddRoutin(props) {
   const [active, setActive] = useState("check");
-  // const [input, setInput] = useState("");
 
   const timerActive = function () {
     setActive("timer");
   };
 
   const plusActive = function () {
-    setActive("increaseDecrease");
+    setActive("plus-minus");
   };
 
   const checkActive = function () {
     setActive("check");
   };
 
+  const [nameValue, setNameValue] = useState("");
+  const [value, setValue] = useState(0);
+  const [hours, sethours] = useState("0");
+  const [minuts, setminuts] = useState("0");
+  const [seconds, setseconds] = useState("0");
+
+  const submitHandler = function (e) {
+    e.preventDefault();
+
+    props.passData({
+      icon: <BsFillFileCheckFill />,
+      iconTitle: `${nameValue}`,
+      time: value,
+      type: active,
+      id: Math.random() * 10000,
+      complete: false,
+      houers: hours,
+      minuts: minuts,
+      seconds: seconds,
+      num: 0,
+    });
+
+    //-------------------
+    setNameValue("");
+    setValue("");
+    sethours("");
+    setminuts("");
+    setseconds("");
+  };
+
+  const titleHandler = function (e) {
+    setNameValue(e.target.value);
+  };
+
+  const valueHandler = function (e) {
+    setValue(e.target.value);
+  };
+
+  const hoursHandler = function (e) {
+    sethours(e.target.value);
+  };
+
+  const minutsHandler = function (e) {
+    setminuts(e.target.value);
+  };
+  const secondsHandler = function (e) {
+    setseconds(e.target.value);
+  };
+
+  const timeChecker = function () {
+    if (active === "check") {
+      return (
+        <input
+          className="title-input"
+          type="text"
+          placeholder="Add your time"
+          onChange={valueHandler}
+          value={nameValue}
+        ></input>
+      );
+    }
+    if (active === "plus-minus") {
+      return (
+        <input
+          className="title-input"
+          type="number"
+          placeholder="Add your number"
+          onChange={valueHandler}
+          value={value}
+        ></input>
+      );
+    }
+    if (active === "timer") {
+      return (
+        <div className="timer-input">
+          <span>
+            <p>hours:</p>
+            <input
+              type="number"
+              className="timer-filler"
+              onChange={hoursHandler}
+              value={hours}
+            ></input>
+          </span>
+          <span>
+            <p>minuts:</p>
+            <input
+              type="number"
+              className="timer-filler"
+              onChange={minutsHandler}
+              value={minuts}
+            ></input>
+          </span>
+
+          <span>
+            <p>seconds:</p>
+            <input
+              type="number"
+              className="timer-filler"
+              onChange={secondsHandler}
+              value={seconds}
+            ></input>
+          </span>
+        </div>
+      );
+    }
+  };
+
   return (
-    <div className="add-new">
+    <form className="add-new" onSubmit={submitHandler}>
       <div className="whole">
         <h1 className="a-h1">Let's add a Routin</h1>
         <div className="add-con">
@@ -31,14 +138,11 @@ function AddRoutin(props) {
             className="title-input"
             type="text"
             placeholder="Add your routin"
+            onChange={titleHandler}
+            value={nameValue}
           ></input>
           <h3 style={{ marginTop: "1rem" }}>Time:</h3>
-          <input
-            type="text"
-            placeholder="add your time"
-            className="time-input"
-          ></input>
-
+          {timeChecker()}
           <h3 style={{ marginTop: "1rem" }}>Type:</h3>
           <div className="choose-type">
             <RiTimerFill
@@ -49,7 +153,7 @@ function AddRoutin(props) {
             <RiIncreaseDecreaseFill
               className="icona"
               style={{
-                color: `${active === "increaseDecrease" ? "#35bdfc" : ""}`,
+                color: `${active === "plus-minus" ? "#35bdfc" : ""}`,
               }}
               onClick={plusActive}
             />
@@ -60,16 +164,21 @@ function AddRoutin(props) {
             />
           </div>
           <div className="flex-b">
+            {/* <Link to="/manager"> */}
+            <div>
+              <button className="btn" type="submit" onClick={submitHandler}>
+                submit
+              </button>
+            </div>
+            {/* </Link> */}
+
             <Link to="/manager">
-              <button className="btn">submit</button>
-            </Link>
-            <Link to="/manager">
-              <button className="btn">cancel</button>
+              <button className="btn">back</button>
             </Link>
           </div>
         </div>
       </div>
-    </div>
+    </form>
   );
 }
 

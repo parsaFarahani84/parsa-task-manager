@@ -1,77 +1,30 @@
 import React, { useState, useEffect } from "react";
 import "./Routins.css";
 import { AiFillPlusCircle } from "react-icons/ai";
-import { MdWork } from "react-icons/md";
-import { FaBed } from "react-icons/fa";
+
 import { BsPlayCircleFill, BsFillPauseCircleFill } from "react-icons/bs";
 import { BiReset } from "react-icons/bi";
 import { AiFillMinusCircle, AiFillCheckCircle } from "react-icons/ai";
 import { BiCircle } from "react-icons/bi";
-import { GiWaterFlask, GiMeditation, GiPartyPopper } from "react-icons/gi";
+
 // import AddRoutin from "../AddRoutin/AddRoutin";
 import { BsPlusSquareFill } from "react-icons/bs";
-import AddRoutin from "../AddRoutin/AddRoutin";
+
 import { Link } from "react-router-dom";
 
 function Routins(props) {
-  const [rData, setRdata] = useState([
-    {
-      icon: <GiWaterFlask className="icons" />,
-      iconTitle: "Glass of Water",
-      time: "8 Times",
-      type: "plus-minus",
-      id: Math.random() * 10000,
-      complete: false,
-      num: 0,
-    },
-
-    {
-      icon: <GiMeditation className="icons" />,
-      iconTitle: "Meditation",
-      time: "10m a day",
-      type: "timer",
-      id: Math.random() * 10000,
-      complete: false,
-      activeTimer: false,
-      houers: 0,
-      minuts: 0,
-      seconds: 0,
-    },
-    {
-      icon: <MdWork className="icons" />,
-      iconTitle: "Work",
-      time: "8h every day",
-      type: "check",
-      id: Math.random() * 10000,
-      complete: false,
-    },
-    {
-      icon: <FaBed className="icons" />,
-      iconTitle: "Sleep well",
-      time: "8h",
-      type: "check",
-      id: Math.random() * 10000,
-      complete: false,
-    },
-    {
-      icon: <GiPartyPopper className="icons" />,
-      iconTitle: "Learn a New Skill",
-      time: "1 per month",
-      type: "check",
-      id: Math.random() * 10000,
-      complete: false,
-    },
-  ]);
+  const [rData, setRdata] = useState(props.getData);
 
   const increaseNum = function (id) {
     let updated = rData.map((e) => {
       if (id === e.id) {
         e.num = e.num + 1;
 
-        if (e.num === 8) {
+        console.log(e.num, e.time);
+        if (e.num == e.time) {
           e.complete = true;
         }
-        if (e.num <= 7) {
+        if (e.num < e.time) {
           e.complete = false;
         }
       }
@@ -86,10 +39,10 @@ function Routins(props) {
         if (e.num > 0) {
           e.num = e.num - 1;
         }
-        if (e.num === 8) {
+        if (e.num == e.time) {
           e.complete = true;
         }
-        if (e.num <= 7) {
+        if (e.num < e.time) {
           e.complete = false;
         }
       }
@@ -145,7 +98,6 @@ function Routins(props) {
     let updated = rData.map((e) => {
       if (e.id === id) {
         e.complete = !e.complete;
-        console.log(e.complete);
       }
       return e;
     });

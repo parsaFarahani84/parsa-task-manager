@@ -18,7 +18,9 @@ import {
   AiOutlineLinkedin,
 } from "react-icons/ai";
 
-function Main() {
+function Main(props) {
+  const resived = props.resiveData;
+
   const data = [
     {
       title: "Today",
@@ -51,7 +53,7 @@ function Main() {
 
   const showM = function () {
     setAcm((e) => !e);
-    console.log(acm);
+    // console.log(acm);
   };
 
   return (
@@ -73,7 +75,7 @@ function Main() {
           ))}
         </div>
 
-        <Routins />
+        <Routins getData={resived} />
 
         <div
           className="menu"
