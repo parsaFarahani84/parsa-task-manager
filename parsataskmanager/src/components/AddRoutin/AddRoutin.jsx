@@ -4,6 +4,7 @@ import { RiTimerFill, RiIncreaseDecreaseFill } from "react-icons/ri";
 import { BsFillFileCheckFill } from "react-icons/bs";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import img from "../../img/add-routine.svg";
 
 function AddRoutin(props) {
   const [active, setActive] = useState("check");
@@ -141,7 +142,10 @@ function AddRoutin(props) {
     <div className="fff">
       <form className="add-new" onSubmit={submitHandler}>
         <div className="whole">
-          <h1 className="a-h1">Let's add a Routin</h1>
+          <div className="addH">
+            <h1 className="a-h1">Let's add a Routin</h1>
+            <img src={img} className="ilu" />
+          </div>
           <div className="add-con">
             <h3>Title:</h3>
             <input
