@@ -53,7 +53,6 @@ function Main(props) {
 
   const showM = function () {
     setAcm((e) => !e);
-    // console.log(acm);
   };
 
   return (
@@ -77,10 +76,7 @@ function Main(props) {
 
         <Routins getData={resived} />
 
-        <div
-          className="menu"
-          style={{ transform: `${acm ? "translate(0%)" : "translate(200%)"}` }}
-        >
+        <div className={acm ? "menu showM" : "menu hideM"}>
           <div className="header-m">
             <img
               src={logo}

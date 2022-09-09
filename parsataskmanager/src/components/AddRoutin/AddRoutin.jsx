@@ -21,13 +21,22 @@ function AddRoutin(props) {
   };
 
   const [nameValue, setNameValue] = useState("");
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState("");
   const [hours, sethours] = useState("0");
   const [minuts, setminuts] = useState("0");
   const [seconds, setseconds] = useState("0");
 
   const submitHandler = function (e) {
     e.preventDefault();
+    if (value === "") {
+      window.alert("please enter something then submit");
+      return;
+    }
+    if (nameValue === "") {
+      window.alert("please enter somethind then submit");
+
+      return;
+    }
 
     props.passData({
       icon: <BsFillFileCheckFill />,
@@ -77,7 +86,7 @@ function AddRoutin(props) {
           type="text"
           placeholder="Add your time"
           onChange={valueHandler}
-          value={nameValue}
+          value={value}
         ></input>
       );
     }
@@ -129,56 +138,56 @@ function AddRoutin(props) {
   };
 
   return (
-    <form className="add-new" onSubmit={submitHandler}>
-      <div className="whole">
-        <h1 className="a-h1">Let's add a Routin</h1>
-        <div className="add-con">
-          <h3>Title:</h3>
-          <input
-            className="title-input"
-            type="text"
-            placeholder="Add your routin"
-            onChange={titleHandler}
-            value={nameValue}
-          ></input>
-          <h3 style={{ marginTop: "1rem" }}>Time:</h3>
-          {timeChecker()}
-          <h3 style={{ marginTop: "1rem" }}>Type:</h3>
-          <div className="choose-type">
-            <RiTimerFill
-              className="icona"
-              style={{ color: `${active === "timer" ? "#35bdfc" : ""}` }}
-              onClick={timerActive}
-            />
-            <RiIncreaseDecreaseFill
-              className="icona"
-              style={{
-                color: `${active === "plus-minus" ? "#35bdfc" : ""}`,
-              }}
-              onClick={plusActive}
-            />
-            <BsFillFileCheckFill
-              className="icona"
-              style={{ color: `${active === "check" ? "#35bdfc" : ""}` }}
-              onClick={checkActive}
-            />
-          </div>
-          <div className="flex-b">
-            {/* <Link to="/manager"> */}
-            <div>
-              <button className="btn" type="submit" onClick={submitHandler}>
-                submit
-              </button>
+    <div className="fff">
+      <form className="add-new" onSubmit={submitHandler}>
+        <div className="whole">
+          <h1 className="a-h1">Let's add a Routin</h1>
+          <div className="add-con">
+            <h3>Title:</h3>
+            <input
+              className="title-input"
+              type="text"
+              placeholder="Add your routin"
+              onChange={titleHandler}
+              value={nameValue}
+            ></input>
+            <h3 style={{ marginTop: "1rem" }}>Time:</h3>
+            {timeChecker()}
+            <h3 style={{ marginTop: "1rem" }}>Type:</h3>
+            <div className="choose-type">
+              <RiTimerFill
+                className="icona"
+                style={{ color: `${active === "timer" ? "#35bdfc" : ""}` }}
+                onClick={timerActive}
+              />
+              <RiIncreaseDecreaseFill
+                className="icona"
+                style={{
+                  color: `${active === "plus-minus" ? "#35bdfc" : ""}`,
+                }}
+                onClick={plusActive}
+              />
+              <BsFillFileCheckFill
+                className="icona"
+                style={{ color: `${active === "check" ? "#35bdfc" : ""}` }}
+                onClick={checkActive}
+              />
             </div>
-            {/* </Link> */}
+            <div className="flex-b">
+              <div>
+                <button className="btny" type="submit" onClick={submitHandler}>
+                  submit
+                </button>
+              </div>
 
-            <Link to="/manager">
-              <button className="btn">back</button>
-            </Link>
+              <Link to="/manager">
+                <button className="btny">back</button>
+              </Link>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }
 
