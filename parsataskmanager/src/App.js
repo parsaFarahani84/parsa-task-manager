@@ -2,7 +2,6 @@ import "./App.css";
 import React from "react";
 import { useState } from "react";
 import Hero from "./components/Hero/Hero";
-import Todo from "./components/Todo/Todo";
 import {
   BrowserRouter as Router,
   Switch,
@@ -20,6 +19,8 @@ import { AiFillInfoCircle } from "react-icons/ai";
 import { FaBoxOpen } from "react-icons/fa";
 import { MdAddBox, MdAddToPhotos } from "react-icons/md";
 import { RiTodoFill } from "react-icons/ri";
+import TodoForm from "./components/Todo/TodoForm";
+import TodoList from "./components/Todo/TodoList";
 
 function App() {
   const [datae, setData] = useState([
@@ -89,7 +90,7 @@ function App() {
           path="/add-routin"
           element={<AddRoutin passData={dataHandler} />}
         ></Route>
-        <Route path="/todo" element={<Todo />}></Route>
+        <Route path="/todo" element={<TodoList />}></Route>
       </Routes>
 
       <SwipeableBottomSheet

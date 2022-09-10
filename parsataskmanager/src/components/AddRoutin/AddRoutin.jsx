@@ -30,11 +30,9 @@ function AddRoutin(props) {
   const submitHandler = function (e) {
     e.preventDefault();
     if (value === "") {
-      window.alert("please enter something then submit");
       return;
     }
     if (nameValue === "") {
-      window.alert("please enter something then submit");
       return;
     }
 

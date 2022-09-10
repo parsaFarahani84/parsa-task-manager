@@ -112,7 +112,6 @@ function Routins(props) {
       }
       return e;
     });
-    console.log(rData);
     setRdata(updated);
   };
 
