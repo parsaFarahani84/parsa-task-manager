@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import "./Routins.css";
 import { AiFillPlusCircle } from "react-icons/ai";
+import SwipeableBottomSheet from "react-swipeable-bottom-sheet";
 
 import { BsPlayCircleFill, BsFillPauseCircleFill } from "react-icons/bs";
 import { BiReset } from "react-icons/bi";
-import { AiFillMinusCircle, AiFillCheckCircle } from "react-icons/ai";
+import {
+  AiFillMinusCircle,
+  AiFillCheckCircle,
+  AiFillInfoCircle,
+} from "react-icons/ai";
 import { BiCircle } from "react-icons/bi";
-
-// import AddRoutin from "../AddRoutin/AddRoutin";
+import { FaTrash, FaBoxOpen } from "react-icons/fa";
+import { MdAddBox, MdAddToPhotos } from "react-icons/md";
 import { BsPlusSquareFill } from "react-icons/bs";
+import { RiTodoFill } from "react-icons/ri";
 
 import { Link } from "react-router-dom";
 
@@ -86,6 +92,11 @@ function Routins(props) {
     });
     setRdata(updated);
   }
+
+  const removeRoutin = (id) => {
+    const removedArr = [...rData].filter((todo) => todo.id !== id);
+    setRdata(removedArr);
+  };
 
   function reset(e) {
     e.seconds = 0;
@@ -191,13 +202,23 @@ function Routins(props) {
               key={prop.id}
             >
               <div className="water-h containers">
-                {prop.icon}
-                <h3 className="font-h">{prop.iconTitle}</h3>
+                <h3 className="font-h">
+                  {" "}
+                  {prop.icon}
+                  {prop.iconTitle}
+                </h3>
               </div>
               <div className="time">
                 <h1>{prop.time}</h1>
               </div>
-              {checking(prop)}
+              <div className="btns">
+                {checking(prop)}
+
+                <FaTrash
+                  className="delete"
+                  onClick={() => removeRoutin(prop.id)}
+                />
+              </div>
             </div>
           ))}
         </div>

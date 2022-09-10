@@ -34,8 +34,7 @@ function AddRoutin(props) {
       return;
     }
     if (nameValue === "") {
-      window.alert("please enter somethind then submit");
-
+      window.alert("please enter something then submit");
       return;
     }
 
@@ -50,6 +49,8 @@ function AddRoutin(props) {
       minuts: minuts,
       seconds: seconds,
       num: 0,
+      activeTmer: false,
+      delete: false,
     });
 
     //-------------------
@@ -106,6 +107,13 @@ function AddRoutin(props) {
       return (
         <div className="timer-input">
           <span>
+            <input
+              className="title-input"
+              type="text"
+              placeholder="Add your time"
+              onChange={valueHandler}
+              value={value}
+            ></input>
             <p>hours:</p>
             <input
               type="number"

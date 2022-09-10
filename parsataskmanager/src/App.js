@@ -2,6 +2,7 @@ import "./App.css";
 import React from "react";
 import { useState } from "react";
 import Hero from "./components/Hero/Hero";
+import Todo from "./components/Todo/Todo";
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,7 +15,11 @@ import AddRoutin from "./components/AddRoutin/AddRoutin";
 import { MdWork } from "react-icons/md";
 import { FaBed } from "react-icons/fa";
 import { GiWaterFlask, GiMeditation, GiPartyPopper } from "react-icons/gi";
-// import AddRoutin from "./components/AddRoutin/AddRoutin";
+import SwipeableBottomSheet from "react-swipeable-bottom-sheet";
+import { AiFillInfoCircle } from "react-icons/ai";
+import { FaBoxOpen } from "react-icons/fa";
+import { MdAddBox, MdAddToPhotos } from "react-icons/md";
+import { RiTodoFill } from "react-icons/ri";
 
 function App() {
   const [datae, setData] = useState([
@@ -73,6 +78,8 @@ function App() {
     });
   };
 
+  const [bootomV, setBottomV] = useState(false);
+
   return (
     <div>
       <Routes>
@@ -82,7 +89,51 @@ function App() {
           path="/add-routin"
           element={<AddRoutin passData={dataHandler} />}
         ></Route>
+        <Route path="/todo" element={<Todo />}></Route>
       </Routes>
+
+      <SwipeableBottomSheet
+        style={{ zIndex: "2" }}
+        overlay={true}
+        overflowHeight={50}
+        onChange={() => {
+          setBottomV(false);
+        }}
+      >
+        <div className="bottom-container">
+          <span className="center">
+            <div className="line"></div>
+          </span>
+          <div className="options">
+            <h2>MENU</h2>
+            <ul className="opti">
+              <li>
+                <Link to="/manager" className="links">
+                  <FaBoxOpen />
+                  Routins
+                </Link>
+              </li>
+              <li>
+                <Link to="/add-routin" className="links">
+                  <MdAddBox />
+                  Add Routin
+                </Link>
+              </li>
+              <li>
+                <Link to="/todo" className="links">
+                  <MdAddToPhotos />
+                  Todo List{" "}
+                </Link>
+              </li>
+
+              <li>
+                <AiFillInfoCircle />
+                Info
+              </li>
+            </ul>
+          </div>
+        </div>
+      </SwipeableBottomSheet>
     </div>
   );
 }
