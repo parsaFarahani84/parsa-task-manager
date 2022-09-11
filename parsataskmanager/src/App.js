@@ -79,7 +79,8 @@ function App() {
     });
   };
 
-  const [bootomV, setBottomV] = useState(false);
+  // const [bootomV, setBottomV] = useState(false);
+  const [closeN, setCloseN] = useState(false);
 
   return (
     <div>
@@ -97,9 +98,10 @@ function App() {
         style={{ zIndex: "2" }}
         overlay={true}
         overflowHeight={50}
-        onChange={() => {
-          setBottomV(false);
+        onChange={(e) => {
+          setCloseN((e) => !e);
         }}
+        open={closeN}
       >
         <div className="bottom-container">
           <span className="center">
@@ -108,26 +110,26 @@ function App() {
           <div className="options">
             <h2>MENU</h2>
             <ul className="opti">
-              <li>
+              <li onClick={() => setCloseN(false)}>
                 <Link to="/manager" className="links">
                   <FaBoxOpen />
                   Routins
                 </Link>
               </li>
-              <li>
+              <li onClick={() => setCloseN(false)}>
                 <Link to="/add-routin" className="links">
                   <MdAddBox />
                   Add Routin
                 </Link>
               </li>
-              <li>
+              <li onClick={() => setCloseN(false)}>
                 <Link to="/todo" className="links">
                   <MdAddToPhotos />
                   Todo List{" "}
                 </Link>
               </li>
 
-              <li>
+              <li onClick={() => setCloseN(false)}>
                 <AiFillInfoCircle />
                 Info
               </li>

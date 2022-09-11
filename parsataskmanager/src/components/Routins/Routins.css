@@ -7,7 +7,7 @@
 .add {
   color: #00aeff;
   cursor: pointer;
-  /* z-index: 1; */
+  z-index: 1;
   font-size: 3rem;
   position: fixed;
   right: 17rem;

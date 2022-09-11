@@ -189,38 +189,36 @@ function Routins(props) {
   };
 
   return (
-    <div className="ggg">
-      <div className="rutins">
-        <Link to="/add-routin">
-          <BsPlusSquareFill className="add" />
-        </Link>
-        <div className="ro">
-          {rData.map((prop) => (
-            <div
-              className={prop.complete ? "styles active" : "styles"}
-              key={prop.id}
-            >
-              <div className="water-h containers">
-                <h3 className="font-h">
-                  {" "}
-                  {prop.icon}
-                  {prop.iconTitle}
-                </h3>
-              </div>
-              <div className="time">
-                <h1>{prop.time}</h1>
-              </div>
-              <div className="btns">
-                {checking(prop)}
-
-                <FaTrash
-                  className="delete"
-                  onClick={() => removeRoutin(prop.id)}
-                />
-              </div>
+    <div>
+      <Link to="/add-routin">
+        <BsPlusSquareFill className="add" />
+      </Link>
+      <div className="ro">
+        {rData.map((prop) => (
+          <div
+            className={prop.complete ? "styles active" : "styles"}
+            key={prop.id}
+          >
+            <div className="water-h containers">
+              <h3 className="font-h">
+                {" "}
+                {prop.icon}
+                {prop.iconTitle}
+              </h3>
             </div>
-          ))}
-        </div>
+            <div className="time">
+              <h1>{prop.time}</h1>
+            </div>
+            <div className="btns">
+              {checking(prop)}
+
+              <FaTrash
+                className="delete"
+                onClick={() => removeRoutin(prop.id)}
+              />
+            </div>
+          </div>
+        ))}
       </div>
     </div>
   );
