@@ -40,13 +40,13 @@ function Main(props) {
   // };
 
   const deleteFunc = function (e) {
-    props.deletHandler(e);
+    return props.deletHandler(e);
   };
 
   return (
     <div className="main-container">
       <span>
-        <Routins getData={resived} delete={deleteFunc} />
+        <Routins getData={resived} />
       </span>
     </div>
   );

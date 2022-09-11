@@ -21,6 +21,7 @@ import { MdAddBox, MdAddToPhotos } from "react-icons/md";
 import { RiTodoFill } from "react-icons/ri";
 import TodoForm from "./components/Todo/TodoForm";
 import TodoList from "./components/Todo/TodoList";
+import Routins from "./components/Routins/Routins";
 
 function App() {
   const [datae, setData] = useState([
@@ -86,7 +87,7 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<Hero />}></Route>
-        <Route path="/manager" element={<Main resiveData={datae} />}></Route>
+        <Route path="/manager" element={<Routins getData={datae} />}></Route>
         <Route
           path="/add-routin"
           element={<AddRoutin passData={dataHandler} />}
