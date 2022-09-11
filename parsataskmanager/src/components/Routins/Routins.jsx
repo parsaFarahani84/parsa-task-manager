@@ -1,20 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./Routins.css";
 import { AiFillPlusCircle } from "react-icons/ai";
-import SwipeableBottomSheet from "react-swipeable-bottom-sheet";
 
 import { BsPlayCircleFill, BsFillPauseCircleFill } from "react-icons/bs";
 import { BiReset } from "react-icons/bi";
-import {
-  AiFillMinusCircle,
-  AiFillCheckCircle,
-  AiFillInfoCircle,
-} from "react-icons/ai";
+import { AiFillMinusCircle, AiFillCheckCircle } from "react-icons/ai";
 import { BiCircle } from "react-icons/bi";
-import { FaTrash, FaBoxOpen } from "react-icons/fa";
-import { MdAddBox, MdAddToPhotos } from "react-icons/md";
+import { FaTrash } from "react-icons/fa";
 import { BsPlusSquareFill } from "react-icons/bs";
-import { RiTodoFill } from "react-icons/ri";
 
 import { Link } from "react-router-dom";
 
@@ -58,36 +51,48 @@ function Routins(props) {
     setRdata(updated);
   };
 
-  // const Effect = function (e) {
-  //   useEffect(() => {
-  //     let interval = null;
+  const [id, getId] = useState();
 
-  //     if (e.activeTimer) {
-  //       interval = setInterval(() => {
-  //         e.seconds = e.seconds + 1;
-  //         if (e.seconds === 59) {
-  //           e.seconds = 0;
-  //           e.minuts = e.minuts + 1;
-  //         }
-  //         if (e.minuts === 59) {
-  //           e.minuts = 0;
-  //           e.houers = e.houers + 1;
-  //         }
-  //       }, 1000);
-  //     } else if (!e.activeTimer && e.seconds !== 0) {
-  //       clearInterval(interval);
-  //     }
+  useEffect(
+    () => {
+      let interval = null;
 
-  //     return () => clearInterval(interval);
-  //   }, [e.activeTimer, e.seconds]);
-  // };
+      rData.map((e) => {
+        if (id === e.id) {
+          if (e.activeTimer) {
+            interval = setInterval(() => {
+              e.seconds = e.seconds + 1;
+              console.log(e.seconds);
+
+              if (e.seconds === 59) {
+                e.seconds = 0;
+                e.minuts = e.minuts + 1;
+              }
+              if (e.minuts === 59) {
+                e.minuts = 0;
+                e.houers = e.houers + 1;
+              }
+            }, 1000);
+          } else if (!e.activeTimer && e.seconds !== 0) {
+            clearInterval(interval);
+          }
+        }
+      });
+
+      return () => clearInterval(interval);
+    },
+    rData.map((e) => {
+      return [e.activeTimer, e.seconds];
+    })
+  );
 
   function toggle(id) {
     let updated = rData.map((e) => {
       if (id === e.id) {
         e.activeTimer = !e.activeTimer;
-        console.log(e.activeTimer);
+        // console.log(e.activeTimer);
       }
+
       return e;
     });
     setRdata(updated);
@@ -168,12 +173,18 @@ function Routins(props) {
                 {!prop.activeTimer ? (
                   <BsPlayCircleFill
                     className="small-check"
-                    onClick={() => toggle(prop.id)}
+                    onClick={() => {
+                      toggle(prop.id);
+                      getId(prop.id);
+                    }}
                   ></BsPlayCircleFill>
                 ) : (
                   <BsFillPauseCircleFill
                     className="small-check"
-                    onClick={() => toggle(prop.id)}
+                    onClick={() => {
+                      toggle(prop.id);
+                      getId(prop.id);
+                    }}
                   ></BsFillPauseCircleFill>
                 )}
                 <BiReset

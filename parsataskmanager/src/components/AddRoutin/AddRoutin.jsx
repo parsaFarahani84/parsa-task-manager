@@ -23,9 +23,9 @@ function AddRoutin(props) {
 
   const [nameValue, setNameValue] = useState("");
   const [value, setValue] = useState("");
-  const [hours, sethours] = useState("0");
-  const [minuts, setminuts] = useState("0");
-  const [seconds, setseconds] = useState("0");
+  const [hours, sethours] = useState(0);
+  const [minuts, setminuts] = useState(0);
+  const [seconds, setseconds] = useState(0);
 
   const submitHandler = function (e) {
     e.preventDefault();
